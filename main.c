@@ -24,12 +24,16 @@
  *                   Cmax = n(n-1)/2 = O(n^2)
  *                   Mmax = 3n(n-1)/2 = O(n^2)
  *                   综上所述平均时间复杂度为O(n^2),空间复杂度为O(1)
+ *      2.选择排序
+ *
  * */
 #include <stdio.h>
+
 //冒泡排序
-int BubbleSort(int arr[],int len)
+void  BubbleSort(int arr[],int len)
 {
     int i_0 = 0,j_0 = 0,temp_0 = 0;
+
     for(i_0 = 0;i_0 < len - 1;i_0++)
         for(j_0 = 0;j_0 < len-1-i_0;j_0++)
         {
@@ -40,17 +44,41 @@ int BubbleSort(int arr[],int len)
                 arr[j_0+1] = temp_0;
             }
         }
-    return 0;
 }
+
+//选择排序
+void Swap(int *a,int *b) //交换两个变数
+{
+    int temp_1 = *a;
+    *a = *b;
+    *b = temp_1;
+}
+void SelectionSort(int arr[],int len)
+{
+    int i_1 = 0,j_1 = 0,min = 0;
+
+    for(i_1 = 0;i_1 < len-1;i_1++)
+    {
+        min = i_1;
+        for(j_1 = i_1+1;j_1 < len;j_1++)        //走访未排序的元素
+        {
+            if(arr[j_1] < arr[min])             //找到目前最小值
+                min = j_1;                      //记录最小值
+            Swap(&arr[min],&arr[i_1]);          //做交换
+        }
+    }
+}
+
 
 int main()
 {
 
-    int arr_0[] = {22,34,3,32,82,55,89,50,37,5,64,35,9,70};
+    int arr_0[] = {22,22,22,9,9,70,89,34,3,32,82,55,89,50,37,5,64,35,9,70};
     int len_0 = (int)sizeof(arr_0)/sizeof(*arr_0);
     int i_1 = 0;
 
-    BubbleSort(arr_0,len_0);
+    //BubbleSort(arr_0,len_0);
+    SelectionSort(arr_0,len_0);
 
     for(i_1 = 0; i_1 < len_0;i_1++)
     {
