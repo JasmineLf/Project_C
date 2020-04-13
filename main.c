@@ -25,6 +25,7 @@
  *                   Mmax = 3n(n-1)/2 = O(n^2)
  *                   综上所述平均时间复杂度为O(n^2),空间复杂度为O(1)
  *      2.选择排序
+ *      3.插入排序
  *
  * */
 #include <stdio.h>
@@ -63,23 +64,41 @@ void SelectionSort(int arr[],int len)
         for(j_1 = i_1+1;j_1 < len;j_1++)        //走访未排序的元素
         {
             if(arr[j_1] < arr[min])             //找到目前最小值
-                min = j_1;                      //记录最小值
-            Swap(&arr[min],&arr[i_1]);          //做交换
+                min = j_1;//记录最小值
+                if(min != i_1)
+                {
+                    Swap(&arr[min],&arr[i_1]);          //做交换
+                }
         }
     }
 }
 
+//插入排序
+void InsertionSort(int arr[],int len)
+{
+    int i_2 = 0,j_2 = 0, temp_1 =0;
+    for(i_2 = 1;i_2<len;i_2++)
+    {
+        temp_1 = arr[i_2];
+        for(j_2=i_2;j_2>0&&arr[j_2-1]>temp_1;j_2--)
+        {
+            arr[j_2] = arr[j_2-1];
+        }
+        arr[j_2] = temp_1;
+    }
+
+}
 
 int main()
 {
 
-    int arr_0[] = {22,22,22,9,9,70,89,34,3,32,82,55,89,50,37,5,64,35,9,70};
+    int arr_0[] = {22,29,9,70,89,34,3,32,82,55,50};
     int len_0 = (int)sizeof(arr_0)/sizeof(*arr_0);
     int i_1 = 0;
 
     //BubbleSort(arr_0,len_0);
-    SelectionSort(arr_0,len_0);
-
+    //SelectionSort(arr_0,len_0);
+    InsertionSort(arr_0,len_0);
     for(i_1 = 0; i_1 < len_0;i_1++)
     {
         printf("%d\n",arr_0[i_1]);
